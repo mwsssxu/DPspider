@@ -1,0 +1,3 @@
+2019-03-06 23:09:49 util.http(DEBUG) - 当前请求[None]:http://s3plus.meituan.net/v1/mss_0a06a471f9514fc79c981b5466f56b91/svgtextcss/ef6ed4846e1531923f99d63a3d260216.svg
+2019-03-06 23:09:50 util.http(DEBUG) - 请求成功:[代理:None,UA:Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36]
+2019-03-06 23:09:50 decorator(DEBUG) - <function send_http at 0x000000000546EAE8> 耗时:0.21s

@@ -73,12 +73,13 @@ soup = bs(html,'lxml')
 address_tag = soup('span',id='address')[0]
 print(f'未解密地址标签：{address_tag}\n')
 # 解密步骤4：直接解析获取到的CSS文件，具体规则看函数parse_shop_css
+# 此步骤获取到解密映射字典
 cls_dict,css_dict = parse_shop_css(css)
 # 解密步骤5：使用Decrypter对象解密标签获得解密文本
 # 其中，Decrypter的decrypt函数增加了参数说明
 # 下面解析地址标签的内容
 decrypter = Decrypter()
-text = decrypter.decrypt(address_tag,cls_dict,css_dict,comment=True)
+text = decrypter.decrypt(address_tag,cls_dict,css_dict)
 print(f'解密后地址文本：{text}\n')
 #其他的加密标签解密也是类似的:)
 ```
