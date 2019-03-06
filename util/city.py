@@ -108,29 +108,29 @@ def post_data(cityId,cityName,keyword,page,shopType,categoryId,regionId,mode,sor
     return data
 
 def transfer_data(item,locations):
-    regions = [find_region_by_id(i,locations) for i in item['regionList']]
+    regions = [find_region_by_id(i,locations) for i in item.get('regionList',[])]
     data = {
-        '店名':item['shopName'],
-        '星级':item['shopPowerTitle'],
-        '注册时间':item['addDate'],
-        '地址':item['address'],
-        '人均':item['avgPrice'],
-        '预订': item['bookingSetting'],
-        '分店url': HOST+item['branchUrl'],
-        '商铺图片': item['defaultPic'],
-        '商铺标签': item['dishTag'],
-        '纬度': item['geoLat'],
-        '经度': item['geoLng'],
-        '电话':item['phoneNo'],
-        '店铺ID':item['shopId'],
-        '会员卡ID': item['memberCardId'],
+        '店名':item.get('shopName'),
+        '星级':item.get('shopPowerTitle'),
+        '注册时间':item.get('addDate'),
+        '地址':item.get('address'),
+        '人均':item.get('avgPrice'),
+        '预订': item.get('bookingSetting'),
+        '分店url': HOST+item.get('branchUrl'),
+        '商铺图片': item.get('defaultPic'),
+        '商铺标签': item.get('dishTag'),
+        '纬度': item.get('geoLat'),
+        '经度': item.get('geoLng'),
+        '电话':item.get('phoneNo'),
+        '店铺ID':item.get('shopId'),
+        '会员卡ID': item.get('memberCardId'),
         '地区':regions,
-        'expand':item['expand'],
-        'poi':item['poi'],
-        'promoId':item['promoId'],
-        'shopDealId':item['shopDealId'],
-        'shopPower':item['shopPower'],
-        'hasSceneryOrder': item['hasSceneryOrder'],
+        'expand':item.get('expand'),
+        'poi':item.get('poi'),
+        'promoId':item.get('promoId'),
+        'shopDealId':item.get('shopDealId'),
+        'shopPower':item.get('shopPower'),
+        'hasSceneryOrder': item.get('hasSceneryOrder'),
     }
     return data
 

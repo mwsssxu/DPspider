@@ -9,7 +9,7 @@ PROXY_ENABLE = True
 # 2.  "username:password@1.1.1.1:1111"
 # 3.  "www.dailiurl.com/path/xxxx"
 # 4.  "username:password@www.dailiurl.com/path/xxxx"
-PROXY = ''
+PROXY = '127.0.0.1:1080'
 
 #IP代理池，优先级低于PROXY高于PROXY_POOL_RAW
 # * 建议使用购买的代理池API，一次请求一个代理，每次请求不重复，请求间隔为INTERVAL

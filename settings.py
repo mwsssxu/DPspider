@@ -62,6 +62,7 @@ TAG_CLASS = {
     # 'branch':('a',{'class_':'branch J-branch'}),
     'stars' :('span',{'class_':'mid-rank-stars'}),
     'scores':('span',{'class_':'score'}),
+    '_scores':('span',{'id':'comment_score'}),
     'reviews':('span',{'class_':'reviews'}),
     'average':('span',{'class_':'price'}),
     'address':('div',{'class_':'address-info'}),
