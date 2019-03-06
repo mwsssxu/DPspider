@@ -83,6 +83,11 @@ text = decrypter.decrypt(address_tag,cls_dict,css_dict)
 print(f'解密后地址文本：{text}\n')
 #其他的加密标签解密也是类似的:)
 ```
+可以直接运行
+```python 
+python how_to_decrypt_tags
+```
+查看具体对比解密输出
 
 * 获取大众点评当前可以查询查看到店铺的所有已激活城市信息
 ```python
