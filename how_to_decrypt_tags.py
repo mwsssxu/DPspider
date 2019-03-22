@@ -11,7 +11,7 @@ with codecs.open('txt/fake.css','r',encoding='utf-8') as f:
     css = f.read()
 # 解密步骤3：整个html进行解析后，获取要解密内容所在的标签，例如，店铺地址所在的标签
 soup = bs(html,'lxml')
-address_tag = soup('span',id='address')[0]
+address_tag = soup('div',class_='address-info')[0]
 print(f'未解密地址标签：{address_tag}\n')
 # 解密步骤4：直接解析获取到的CSS文件，具体规则看函数parse_shop_css
 # 此步骤获取到解密映射字典
