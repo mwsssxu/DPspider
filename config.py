@@ -9,7 +9,7 @@ PROXY_ENABLE = True
 # 2.  "username:password@1.1.1.1:1111"
 # 3.  "www.dailiurl.com/path/xxxx"
 # 4.  "username:password@www.dailiurl.com/path/xxxx"
-PROXY = ''
+PROXY = '127.0.0.1:1080'
 
 #IP代理池，优先级低于PROXY高于PROXY_POOL_RAW
 # * 建议使用购买的代理池API，一次请求一个代理，每次请求不重复，请求间隔为INTERVAL
@@ -70,6 +70,12 @@ MongoDB = {
 
 #允许网络请求的HTTP方法
 HTTP_METHODS = ['get','head','post','put','options']
+
+# 大众点评 加密标签 数字与字符的不定期改变的名称
+TAG_CHANGED = {
+	'number':'cc',
+	'string':'bb',
+}
 
 #记录搜索爬取痕迹，下次搜索爬取便不会重复下载存储
 RECORD_ENABLE = True

@@ -1,6 +1,7 @@
 #coding:utf-8
 
 from settings import *
+from config import TAG_CHANGED
 from bs4.element import Tag
 from util.tools import from_pattern
 from util.decrypt import _clean,_find_css,\
@@ -8,13 +9,19 @@ from util.decrypt import _clean,_find_css,\
 
 class Decrypter(object):
 
-    def __init__(self,shopId):
+    def __init__(self,shopId=None):
         self.shopId = shopId
         self.svg = None
         self._str_svg = None
         self._num_svg = None
 
     def decrypt(self,soup,cls_dict,css_dict,pattern='.*',comment=False):
+        '''
+        soup:加密的标签
+        cls_dict,css_dict:解析css文件得到的解密字典。
+        pattern:解密后的正则匹配模式，会匹配解密后的文本，将符合正则的内容返回
+        comment:当前标签是否属于点评评论标签。有些不是属于评论内容的标签不用置True
+        '''
         _contents = soup.contents
         _ = []
         while _contents:
@@ -42,14 +49,14 @@ class Decrypter(object):
         if f and _css:
             if  not comment:
                 svg = {
-                    'e':self._str_svg,
-                    'd':self._num_svg,
+                    TAG_CHANGED['string']:self._str_svg,
+                    TAG_CHANGED['number']:self._num_svg,
                 }[element.name]
                 if svg is None:
                     svg = eval(DECRYPT_TAGS[element.name.strip()])(url)
                     {
-                        'e': self._str_svg,
-                        'd': self._num_svg,
+                        TAG_CHANGED['string']: self._str_svg,
+                        TAG_CHANGED['number']: self._num_svg,
                     }[element.name] = svg
             else:
                 if self.svg is None:

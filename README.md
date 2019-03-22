@@ -54,6 +54,41 @@
 > 其他相关的配置可以参见config.py 中的设置注解
 ## 使用
 
+### 解密
+
+如果你看到这里只是为了找到如何解密当前大众点评的加密标签，也许下面这段代码就是你要的：
+```python
+import codecs
+from util.shop import parse_shop_css
+from decrypt import Decrypter
+from bs4 import BeautifulSoup as bs 
+# 解密步骤1：获取当前页面的html内容
+with codecs.open('txt/fake.html','r',encoding='utf-8') as f:
+    html = f.read()
+# 解密步骤2：获取当前页面的加密用css文件内容，具体获取可以用正则匹配等
+with codecs.open('txt/fake.css','r',encoding='utf-8') as f:
+    css = f.read()
+# 解密步骤3：整个html进行解析后，获取要解密内容所在的标签，例如，店铺地址所在的标签
+soup = bs(html,'lxml')
+address_tag = soup('span',id='address')[0]
+print(f'未解密地址标签：{address_tag}\n')
+# 解密步骤4：直接解析获取到的CSS文件，具体规则看函数parse_shop_css
+# 此步骤获取到解密映射字典
+cls_dict,css_dict = parse_shop_css(css)
+# 解密步骤5：使用Decrypter对象解密标签获得解密文本
+# 其中，Decrypter的decrypt函数增加了参数说明
+# 下面解析地址标签的内容
+decrypter = Decrypter()
+text = decrypter.decrypt(address_tag,cls_dict,css_dict)
+print(f'解密后地址文本：{text}\n')
+#其他的加密标签解密也是类似的:)
+```
+可以直接运行
+```python 
+python how_to_decrypt_tags
+```
+查看具体对比解密输出
+
 * 获取大众点评当前可以查询查看到店铺的所有已激活城市信息
 ```python
 from dianping import DianPing
@@ -294,7 +329,10 @@ relative = beijing.get_relative('健身')
 save表示是否保存进MongoDB数据库，details表示是否抓取店铺的详细信息。具体参数可见search函数注释。
 ```python
 from city import City
-beijing = City('北京')
+from dbhelper import Database
+from config import MongoDB
+db = Database(MongoDB)
+beijing = City('北京',searchDB=db)
 beijing.get()
 results = beijing.search('器材',category='运动健身',location='海淀区',filter='有团购',sort='按人气排序',save=True,details=True)
 ```

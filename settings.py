@@ -1,5 +1,5 @@
 #coding:utf-8
-from config import COOKIE
+from config import COOKIE,TAG_CHANGED
 
 #点评首页
 HOST = 'http://www.dianping.com'
@@ -41,8 +41,8 @@ PATTERN_USER_LEVEL = 'square(.+)\.'
 
 #解密字体需要的标签对应的函数
 DECRYPT_TAGS = {
-                'd':'_get_num_svg',
-                'e':'_get_str_svg',
+                TAG_CHANGED['number']:'_get_num_svg',
+                TAG_CHANGED['string']:'_get_str_svg',
                 'span':'_get_num_svg'
             }
 
@@ -62,6 +62,7 @@ TAG_CLASS = {
     # 'branch':('a',{'class_':'branch J-branch'}),
     'stars' :('span',{'class_':'mid-rank-stars'}),
     'scores':('span',{'class_':'score'}),
+    '_scores':('span',{'id':'comment_score'}),
     'reviews':('span',{'class_':'reviews'}),
     'average':('span',{'class_':'price'}),
     'address':('div',{'class_':'address-info'}),
