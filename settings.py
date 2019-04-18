@@ -139,6 +139,7 @@ SEARCH_MAP_POST_HEADERS = {
     'X-Requested-With': 'XMLHttpRequest',
     'Accept': 'application/json, text/javascript',
     'Origin': 'http://www.dianping.com',
+    'Referer':'http://www.dianping.com/search/map/keyword/2/0_1',
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     'User-Agent':USER_AGENT,
 }
