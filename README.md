@@ -496,6 +496,6 @@ target_shop.get_reviews(tname='保存数据表名',count=300,frompage=2)
 
 欢迎加入知识星球：
 
-[星球](star.png)
+![虫圈](star.png)
 
 星球内会交流关于各类爬虫的源码、反爬、加密解密以及代理问题、数据交易行情等内幕~
