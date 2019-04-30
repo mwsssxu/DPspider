@@ -1,5 +1,5 @@
 #coding:utf-8
-from config import COOKIE,TAG_CHANGED
+from config import COOKIE,TAG_CHANGED,COMMENT_TAGS
 
 #点评首页
 HOST = 'http://www.dianping.com'
@@ -43,7 +43,9 @@ PATTERN_USER_LEVEL = 'square(.+)\.'
 DECRYPT_TAGS = {
                 TAG_CHANGED['number']:'_get_num_svg',
                 TAG_CHANGED['string']:'_get_str_svg',
-                'span':'_get_num_svg'
+                'span':'_get_num_svg',
+                COMMENT_TAGS['string']:'_get_comment_svg',
+                COMMENT_TAGS['number']:'_get_comment_svg',
             }
 
 #点评类属性对应函数

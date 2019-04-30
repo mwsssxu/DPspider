@@ -1,11 +1,11 @@
 #coding:utf-8
 
 from settings import *
-from config import TAG_CHANGED
+from config import TAG_CHANGED,COMMENT_TAGS
 from bs4.element import Tag
 from util.tools import from_pattern
 from util.decrypt import _clean,_find_css,\
-    _find_head,_get_str_svg,_get_num_svg
+    _find_head,_get_str_svg,_get_num_svg,_get_comment_svg
 
 class Decrypter(object):
 
@@ -47,7 +47,7 @@ class Decrypter(object):
         f,url = _find_head(cls,tag_dict)
         _css = _find_css(cls,css_dict)
         if f and _css:
-            if  not comment:
+            if not comment:
                 svg = {
                     TAG_CHANGED['string']:self._str_svg,
                     TAG_CHANGED['number']:self._num_svg,
@@ -59,8 +59,18 @@ class Decrypter(object):
                         TAG_CHANGED['number']: self._num_svg,
                     }[element.name] = svg
             else:
+                svg = {
+                    COMMENT_TAGS['string']:self._str_svg,
+                    COMMENT_TAGS['number']:self._num_svg,
+                }.get(element.name)
+                if svg is None:
+                    svg = eval(DECRYPT_TAGS[element.name.strip()])(url)
+                    {
+                        COMMENT_TAGS['string']: self._str_svg,
+                        COMMENT_TAGS['number']: self._num_svg,
+                    }[element.name] = svg
                 if self.svg is None:
-                    self.svg = _get_str_svg(url)
+                    self.svg = _get_str_svg(url) if not comment else _get_comment_svg(url)
                 svg = self.svg
             for y,_str in svg.items():
                 if _css['y'] > int(y):

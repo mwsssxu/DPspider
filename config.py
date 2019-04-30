@@ -1,3 +1,4 @@
+import time 
 
 #是否使用代理
 PROXY_ENABLE = True
@@ -73,9 +74,18 @@ HTTP_METHODS = ['get','head','post','put','options']
 
 # 大众点评 加密标签 数字与字符的不定期改变的名称
 TAG_CHANGED = {
-	'number':'cc',
-	'string':'bb',
+	'number':'d',
+	'string':'e',
 }
+
+COMMENT_TAGS = {
+    'number':'svgmtsi',
+    'string':'svgmtsi',
+}
+
+NUM_SVG_PATH = f'svg/num{time.strftime("%Y-%m-%d",time.localtime(time.time()))}.svg'
+STR_SVG_PATH = f'svg/str{time.strftime("%Y-%m-%d",time.localtime(time.time()))}.svg'
+COMMENT_SVG_PATH =f'svg/comment{time.strftime("%Y-%m-%d",time.localtime(time.time()))}.svg'
 
 #记录搜索爬取痕迹，下次搜索爬取便不会重复下载存储
 RECORD_ENABLE = True
