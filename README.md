@@ -56,6 +56,10 @@
 
 ### 解密
 
+2019-05-04:
+
+#### 大众点评网页版最近的点评使用woff字体反爬，最新的解密请看GitHub库：[01ly/Anti-Spider](https://github.com/01ly/Anti-Spider)
+
 如果你看到这里只是为了找到如何解密当前大众点评的加密标签，也许下面这段代码就是你要的：
 ```python
 #coding:utf-8

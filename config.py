@@ -10,7 +10,7 @@ PROXY_ENABLE = True
 # 2.  "username:password@1.1.1.1:1111"
 # 3.  "www.dailiurl.com/path/xxxx"
 # 4.  "username:password@www.dailiurl.com/path/xxxx"
-PROXY = '127.0.0.1:1080'
+PROXY = ''
 
 #IP代理池，优先级低于PROXY高于PROXY_POOL_RAW
 # * 建议使用购买的代理池API，一次请求一个代理，每次请求不重复，请求间隔为INTERVAL
@@ -20,8 +20,7 @@ PROXY = '127.0.0.1:1080'
 # 1、 "http:http://39.108.59.38:8888/Tools/proxyIP.ashx?OrderNumber=xxxx&poolIndex=xxx&cache=1&qty=1"
 # 2、 ['1.1.1.1:1111','1.1.1.1:1112','1.1.1.1:1113',...]
 # 3、 "D://proxyfile.txt"
-PROXY_POOL =  'http://39.108.59.38:8888/Tools/proxyIP.ashx?OrderNumber=912694cb32aff4d695d58412c48c3859&poolIndex=17922&cache=1&qty=1'
-# PROXY_POOL = 'http://39.108.59.38:8888/Tools/proxyIP.ashx?OrderNumber=a2b03f9d740e34f50946d4d8f5b6707f&poolIndex=53411&cache=1&qty=1'
+PROXY_POOL =  'https://xxxxxxxxxxxxget?token=&amount=1&proxy_type=http&format=txt&splitter=rn&expire=300'
 
 #未经过验证有效性的代理池文件,如:'txt/rawproxy.txt'，如果PROXY_POOL是一个文件
 #那么程序会进行自动检测代理的有效性后将可用代理写入PROXY_POOL
