@@ -1,17 +1,17 @@
-#coding:utf-8
-from config import COOKIE,TAG_CHANGED,COMMENT_TAGS
+# coding:utf-8
+from config import COOKIE, TAG_CHANGED, COMMENT_TAGS
 
-#点评首页
+# 点评首页
 HOST = 'http://www.dianping.com'
 
-#各类请求URL
+# 各类请求URL
 API_CITY = 'https://www.dianping.com/{city}'
 API_CITY_LIST = 'http://www.dianping.com/citylist'
 API_CITY_HOT = 'http://www.dianping.com/bar/search?cityId={id}'
 API_CITY_MAP = 'http://www.dianping.com/search/map/keyword/{id}/0_1'
-API_SHOP  = 'http://www.dianping.com/shop/{id}/review_all'
+API_SHOP = 'http://www.dianping.com/shop/{id}/review_all'
 API_REVIEWS = 'http://www.dianping.com/shop/{id}/review_all/p{page}'
-API_SHOP_DETAIL  = 'http://www.dianping.com/shop/{id}'
+API_SHOP_DETAIL = 'http://www.dianping.com/shop/{id}'
 API_SEARCH = 'https://www.dianping.com/search/keyword/{cityId}/0_{keyword}'
 API_MAP_SEARCH = 'http://www.dianping.com/search/map/ajax/json'
 API_SEARCH_CITY = 'http://www.dianping.com/ajax/citylist/searchDomesticCity'
@@ -20,12 +20,12 @@ API_PLACES = 'https://www.dianping.com/ajax/citylist/getDomesticCityByProvince'
 API_REVIEWS_HOME = 'http://www.dianping.com/review/{id}'
 API_KEY_RELATIVE = 'http://www.dianping.com/ajax/json/suggest/search?do=hsc&c={id}&s=0&q={key}'
 
-#各类正则抽取
+# 各类正则抽取
 PATTERN_CITYID = r"'cityId':.?'(.+)',"
 PATTERN_CITYCN = r"'cityCName':.?'(.+)',"
 PATTERN_CSS = r'//(s3plus.meituan.net.+?)"'
 PATTERN_BACKGROUND = r'.(.*?){background:(.*?)px(.*?)px;}'
-PATTERN_SPAN_CLASS =r'\[class\^="(.+?)"\]{width:(.+?)px;.+?url\((.+?)\)'
+PATTERN_SPAN_CLASS = r'\[class\^="(.+?)"\]{width:(.+?)px;.+?url\((.+?)\)'
 PATTERN_TITLE = 'title="(.*)"'
 PATTERN_HREF = 'href="(.*)"'
 PATTERN_NUMS = '(\d+)'
@@ -39,114 +39,114 @@ PATTERN_STAR = '-str(\d+)'
 PATTERN_PHONE = '(1[\d]{10})'
 PATTERN_USER_LEVEL = 'square(.+)\.'
 
-#解密字体需要的标签对应的函数
+# 解密字体需要的标签对应的函数
 DECRYPT_TAGS = {
-                TAG_CHANGED['number']:'_get_num_svg',
-                TAG_CHANGED['string']:'_get_str_svg',
-                'span':'_get_num_svg',
-                COMMENT_TAGS['string']:'_get_comment_svg',
-                COMMENT_TAGS['number']:'_get_comment_svg',
-            }
+    TAG_CHANGED['number']: '_get_num_svg',
+    TAG_CHANGED['string']: '_get_str_svg',
+    'span': '_get_num_svg',
+    COMMENT_TAGS['string']: '_get_comment_svg',
+    COMMENT_TAGS['number']: '_get_comment_svg',
+}
 
-#点评类属性对应函数
+# 点评类属性对应函数
 DIANPING_FUNC = {
-    '_provinces':'get_provinces',
-    '_active_cities':'get_active_cities'
+    '_provinces': 'get_provinces',
+    '_active_cities': 'get_active_cities'
 }
 
-#加密文本中无效的标签
-IGNORED_SPAN_CLASS = ['info-name',]
+# 加密文本中无效的标签
+IGNORED_SPAN_CLASS = ['info-name', ]
 
-#解析html对应所需字段的标签和属性，可进行修改
+# 解析html对应所需字段的标签和属性，可进行修改
 TAG_CLASS = {
-    #店铺标签
-    'name'  :('h1',{'class_':'shop-name'}),
+    # 店铺标签
+    'name': ('h1', {'class_': 'shop-name'}),
     # 'branch':('a',{'class_':'branch J-branch'}),
-    'stars' :('span',{'class_':'mid-rank-stars'}),
-    'scores':('span',{'class_':'score'}),
-    '_scores':('span',{'id':'comment_score'}),
-    'reviews':('span',{'class_':'reviews'}),
-    'average':('span',{'class_':'price'}),
-    'address':('div',{'class_':'address-info'}),
-    'phone'  :('div',{'class_':'phone-info'}),
-    'business_hours':('p',{'class_':'info info-indent'}),
-    'comment_kinds':('div',{'class_':'filters'}),
-    'review_tags':('div',{'class_':'reviews-tags'}),
-    #城市标签
-    'city_category':('ul',{'class_':'first-cate'}),
-    'city_list':('div',{'class_':'main-citylist'}),
-    #搜索相关 - 地图搜索
-    'filters':('div',{'class_':'screen-filter'}),
-    #点评相关
-    'review_items':('div',{'class_':'reviews-items'}),
-    'next':('a',{'class_':'NextPage'}),
+    'stars': ('span', {'class_': 'mid-rank-stars'}),
+    'scores': ('span', {'class_': 'score'}),
+    '_scores': ('span', {'id': 'comment_score'}),
+    'reviews': ('span', {'class_': 'reviews'}),
+    'average': ('span', {'class_': 'price'}),
+    'address': ('div', {'class_': 'address-info'}),
+    'phone': ('div', {'class_': 'phone-info'}),
+    'business_hours': ('p', {'class_': 'info info-indent'}),
+    'comment_kinds': ('div', {'class_': 'filters'}),
+    'review_tags': ('div', {'class_': 'reviews-tags'}),
+    # 城市标签
+    'city_category': ('ul', {'class_': 'first-cate'}),
+    'city_list': ('div', {'class_': 'main-citylist'}),
+    # 搜索相关 - 地图搜索
+    'filters': ('div', {'class_': 'screen-filter'}),
+    # 点评相关
+    'review_items': ('div', {'class_': 'reviews-items'}),
+    'next': ('a', {'class_': 'NextPage'}),
 
 }
 
-#sql语句与MongoDB语句的映射
+# sql语句与MongoDB语句的映射
 CON_MAP = {
-    '=':'$eq',
-    '<':'$lt',
-    '<=':'$lte',
-    '>':'$gt',
-    '>=':'$gte',
-    '!=':'$ne',
+    '=': '$eq',
+    '<': '$lt',
+    '<=': '$lte',
+    '>': '$gt',
+    '>=': '$gte',
+    '!=': '$ne',
 }
 
-#一般请求的伪造浏览器信息和头部
-USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+# 一般请求的伪造浏览器信息和头部
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 HEADERS = {
     'Host': 'www.dianping.com',
-    'User-Agent':USER_AGENT,
+    'User-Agent': USER_AGENT,
 }
 
-#获取点评数据时需要登录，这里加入了Cooike信息
-#需要在config中配置
+# 获取点评数据时需要登录，这里加入了Cooike信息
+# 需要在config中配置
 LOGIN_HEADERS = {
     'Host': 'www.dianping.com',
-    'User-Agent':USER_AGENT,
-    'Cookie':COOKIE,
+    'User-Agent': USER_AGENT,
+    'Cookie': COOKIE,
 }
 
-#请求资源前缀
+# 请求资源前缀
 CSS_URL_PREFIX = 'http:'
 CITY_URL_PREFIX = 'http:'
 
-#解密需要的CSS文件请求头部
-CSS_HEADERS ={
-    'Host':'s3plus.meituan.net',
+# 解密需要的CSS文件请求头部
+CSS_HEADERS = {
+    'Host': 's3plus.meituan.net',
     'Accept-Encoding': 'gzip, deflate',
     'Upgrade-Insecure-Requests': '1',
-    'User-Agent':USER_AGENT,
+    'User-Agent': USER_AGENT,
 }
 
-#获取城市数据信息的POST头部
+# 获取城市数据信息的POST头部
 CITY_POST_HEADER = {
     'Referer': "https://www.dianping.com/citylist",
     'Content-Type': 'application/JSON',
     'X-Requested-With': 'XMLHttpRequest',
 }
 
-#搜索关键词店铺显示最多的页数，大众点评固定的50页
+# 搜索关键词店铺显示最多的页数，大众点评固定的50页
 SEARCH_LIMITS = 50
-#搜索单页最多的店铺个数，大众点评固定的20个
+# 搜索单页最多的店铺个数，大众点评固定的20个
 SEARCH_META_COUNT = 20
-#单个店铺点评数据每页最多的条数，大众点评固定的20条
+# 单个店铺点评数据每页最多的条数，大众点评固定的20条
 COMMENT_META_COUNT = 20
 
-#地图搜索POST伪造请求头部
+# 地图搜索POST伪造请求头部
 SEARCH_MAP_POST_HEADERS = {
-    'Host':'www.dianping.com',
+    'Host': 'www.dianping.com',
     'X-Request': 'JSON',
     'X-Requested-With': 'XMLHttpRequest',
     'Accept': 'application/json, text/javascript',
     'Origin': 'http://www.dianping.com',
-    'Referer':'http://www.dianping.com/search/map/keyword/2/0_1',
+    'Referer': 'http://www.dianping.com/search/map/keyword/2/0_1',
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    'User-Agent':USER_AGENT,
+    'User-Agent': USER_AGENT,
 }
 
-#地图搜索的过滤器对应标签
+# 地图搜索的过滤器对应标签
 SEARCH_MAP_FILTERS = {
     '有团购': '3',
     '有优惠券': '1',
@@ -154,7 +154,7 @@ SEARCH_MAP_FILTERS = {
     '在线预订': '5'
 }
 
-#UA池，可以继续添加新的大众点评可用UA
+# UA池，可以继续添加新的大众点评可用UA
 USER_AGENTS = [
     "Mozilla/5.0 (Linux; U; Android 2.3.7; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
     "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; TencentTraveler 4.0; .NET CLR 2.0.50727)",

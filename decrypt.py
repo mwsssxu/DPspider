@@ -1,21 +1,22 @@
-#coding:utf-8
+# coding:utf-8
 
 from settings import *
-from config import TAG_CHANGED,COMMENT_TAGS
+from config import TAG_CHANGED, COMMENT_TAGS
 from bs4.element import Tag
 from util.tools import from_pattern
-from util.decrypt import _clean,_find_css,\
-    _find_head,_get_str_svg,_get_num_svg,_get_comment_svg
+from util.decrypt import _clean, _find_css, \
+    _find_head, _get_str_svg, _get_num_svg, _get_comment_svg
+
 
 class Decrypter(object):
 
-    def __init__(self,shopId=None):
+    def __init__(self, shopId=None):
         self.shopId = shopId
         self.svg = None
         self._str_svg = None
         self._num_svg = None
 
-    def decrypt(self,soup,cls_dict,css_dict,pattern='.*',comment=False):
+    def decrypt(self, soup, cls_dict, css_dict, pattern='.*', comment=False):
         '''
         soup:加密的标签
         cls_dict,css_dict:解析css文件得到的解密字典。
@@ -33,24 +34,24 @@ class Decrypter(object):
                     if i['class'][0] == 'item':
                         i_contents = i.contents
                         for j in reversed(i_contents):
-                            _contents.insert(0,j)
+                            _contents.insert(0, j)
                         continue
-                    i = self._get_decrypted(i,cls_dict,css_dict,comment)
+                    i = self._get_decrypted(i, cls_dict, css_dict, comment)
             elif not isinstance(i, str):
                 continue
             _.append(i)
-        text =  _clean(_)
+        text = _clean(_)
         return from_pattern(pattern, text)
 
-    def _get_decrypted(self,element,tag_dict,css_dict,comment=False):
+    def _get_decrypted(self, element, tag_dict, css_dict, comment=False):
         cls = element['class'][0]
-        f,url = _find_head(cls,tag_dict)
-        _css = _find_css(cls,css_dict)
+        f, url = _find_head(cls, tag_dict)
+        _css = _find_css(cls, css_dict)
         if f and _css:
             if not comment:
                 svg = {
-                    TAG_CHANGED['string']:self._str_svg,
-                    TAG_CHANGED['number']:self._num_svg,
+                    TAG_CHANGED['string']: self._str_svg,
+                    TAG_CHANGED['number']: self._num_svg,
                 }[element.name]
                 if svg is None:
                     svg = eval(DECRYPT_TAGS[element.name.strip()])(url)
@@ -60,8 +61,8 @@ class Decrypter(object):
                     }[element.name] = svg
             else:
                 svg = {
-                    COMMENT_TAGS['string']:self._str_svg,
-                    COMMENT_TAGS['number']:self._num_svg,
+                    COMMENT_TAGS['string']: self._str_svg,
+                    COMMENT_TAGS['number']: self._num_svg,
                 }.get(element.name)
                 if svg is None:
                     svg = eval(DECRYPT_TAGS[element.name.strip()])(url)
@@ -72,8 +73,8 @@ class Decrypter(object):
                 if self.svg is None:
                     self.svg = _get_str_svg(url) if not comment else _get_comment_svg(url)
                 svg = self.svg
-            for y,_str in svg.items():
+            for y, _str in svg.items():
                 if _css['y'] > int(y):
                     continue
-                x = int(_css['x']/f)
+                x = int(_css['x'] / f)
                 return _str[x]
