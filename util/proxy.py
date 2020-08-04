@@ -19,6 +19,8 @@ def get_proxy():
     if PROXY:
         if not is_url(PROXY):
             return gen_proxy(PROXY)
+    if isinstance(PROXY_POOL, list):
+        return random.choice([gen_proxy(i) for i in PROXY_POOL])
     if is_url(PROXY_POOL):
         p = requests.get(PROXY_POOL).text.strip('\r\n')
         return gen_proxy(p)
@@ -26,6 +28,4 @@ def get_proxy():
         with open(PROXY_POOL, 'r') as f:
             p_txt = f.readlines()
         return random.choice([gen_proxy(i) for i in p_txt])
-    if isinstance(PROXY_POOL, list):
-        return random.choice([gen_proxy(i) for i in PROXY_POOL])
     return None

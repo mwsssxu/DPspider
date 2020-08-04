@@ -45,13 +45,14 @@ def send_http(session, method, url, *,
     while attempt != 0:
         try:
             try:
+                proxy = get_proxy()
                 response = getattr(session, method.lower())(url,
                                                             timeout=timeout,
                                                             proxies=proxy,
                                                             headers=headers,
                                                             **kwargs)
             except Exception as e:
-                logger.debug(f'[请求异常-代理:{proxy}] {e.__class__.__name__}:{e}')
+                logger.info(f'[请求异常-代理:{proxy}] {e.__class__.__name__}:{e}')
                 fails += 1
                 if PROXY_ENABLE:
                     proxy = get_proxy()
@@ -79,7 +80,7 @@ def send_http(session, method, url, *,
                 if forbiddens > FORBIDDEN_MAX_TO_CHANGE and _ua:
                     headers['User-Agent'] = _ua.pop(random.choice([i for i in range(len(_ua))]))
                     # forbiddens = 0
-                    logger.debug(f'切换UA:{headers["User-Agent"]}')
+                    logger.info(f'切换UA:{headers["User-Agent"]}')
                 if fails > FAIL_MAX_TO_DROP:
                     break
                 if PROXY_ENABLE:

@@ -10,7 +10,7 @@ PROXY_ENABLE = True
 # 2.  "username:password@1.1.1.1:1111"
 # 3.  "www.dailiurl.com/path/xxxx"
 # 4.  "username:password@www.dailiurl.com/path/xxxx"
-PROXY = '211.137.52.159:8080'
+PROXY = ''
 
 # IP代理池，优先级低于PROXY高于PROXY_POOL_RAW
 # * 建议使用购买的代理池API，一次请求一个代理，每次请求不重复，请求间隔为INTERVAL
@@ -20,7 +20,9 @@ PROXY = '211.137.52.159:8080'
 # 1、 "http:http://39.108.59.38:8888/Tools/proxyIP.ashx?OrderNumber=xxxx&poolIndex=xxx&cache=1&qty=1"
 # 2、 ['1.1.1.1:1111','1.1.1.1:1112','1.1.1.1:1113',...]
 # 3、 "D://proxyfile.txt"
-PROXY_POOL = ['198.50.152.64:22435', '51.79.51.213:80', '199.119.74.34:4145']
+PROXY_POOL = ['91.206.30.218:3128', '95.140.27.135:58901', '43.224.8.124:6666', '139.255.123.194:4550',
+              '136.243.32.248:5836', '78.47.16.54:80', '182.253.184.85:8181', '71.7.195.112:3128']
+# PROXY_POOL = 'http://39.108.59.38:8888/Tools/proxyIP.ashx?OrderNumber=912694cb32aff4d695d58412c48c3859&poolIndex=17922&cache=1&qty=1'
 
 # 未经过验证有效性的代理池文件,如:'txt/rawproxy.txt'，如果PROXY_POOL是一个文件
 # 那么程序会进行自动检测代理的有效性后将可用代理写入PROXY_POOL
@@ -60,12 +62,12 @@ PROVINCE_FILE_PATH = 'JSON/province.json'
 # MongoDB数据库设置
 MongoDB = {
     'host': '127.0.0.1',
-    'port': 27138,
+    'port': 27017,
     'database': 'dianping',
     'records': '爬取记录',
     'searchDB': '大众点评地图搜索',
-    'user': '',
-    'password': '',
+    'user': 'xuning',
+    'password': '0okm9ijn',
 }
 
 # 允许网络请求的HTTP方法
